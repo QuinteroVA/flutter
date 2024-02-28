@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class Headerwidget extends StatelessWidget {
   const Headerwidget({Key? key}) : super(key: key);
-  static TextStyle tituloTextStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 26);
-  static TextStyle subTituloTextStyle = const TextStyle(color: Colors.white, fontSize: 17);
+  static TextStyle tituloTextStyle = const TextStyle(
+      color: Colors.white, fontWeight: FontWeight.bold, fontSize: 26);
+  static TextStyle subTituloTextStyle =
+      const TextStyle(color: Colors.white, fontSize: 17);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,12 +15,12 @@ class Headerwidget extends StatelessWidget {
         decoration: const BoxDecoration(color: Color.fromARGB(255, 41, 40, 39)),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Column(
+          Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Consecionaria", style: tituloTextStyle),
-                Text("Autos", style: subTituloTextStyle)
+                Text("Mi Carrito Nuevo", style: tituloTextStyle),
+                Text("Concesionaria", style: subTituloTextStyle)
               ]),
           Row(children: [
             Container(
