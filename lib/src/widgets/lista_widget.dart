@@ -30,15 +30,15 @@ class _listaAutosState extends State<listaAutos> {
           ),
           Row(
             children: [
-              bloqueAuto("auto1.jpg", "Modelo X", "2023", "\$50,000"),
+              bloquePortada("auto1.jpg", " Marca X", "2021"),
               SizedBox(
                 width: widthPantalla * 0.03,
               ),
-              bloqueAuto("auto2.jpg", "Modelo Y", "2022", "\$40,000"),
+              bloquePortada("auto2.jpg", " Marca Y", "2021"),
               SizedBox(
                 width: widthPantalla * 0.03,
               ),
-              bloqueAuto("auto3.jpg", "Modelo Z", "2021", "\$30,000"),
+              bloquePortada("auto3.jpg", " Marca Z", "2021")
             ],
           ),
           const Divider(
@@ -48,37 +48,30 @@ class _listaAutosState extends State<listaAutos> {
           const SizedBox(
             height: 20,
           ),
-          bloqueAuto("auto4.jpg", "Modelo A", "2020", "\$20,000"),
-          bloqueAuto("auto5.jpg", "Modelo B", "2019", "\$10,000"),
-          bloqueAuto("auto6.jpg", "Modelo C", "2018", "\$5,000"),
+          bloqueAutos("Modelo A", 0xff21E295, "auto4"),
+          bloqueAutos("Modelo B", 0xff21E295, "auto5"),
+          bloqueAutos("Modelo C", 0xff21E295, "auto6"),
+          bloqueAutos("Modelo D", 0xff21E295, "auto7"),
+          bloqueAutos("Modelo E", 0xff21E295, "auto8"),
+          bloqueAutos("Modelo F", 0xff21E295, "auto9"),
         ],
       ),
     );
   }
 
-  Widget bloqueAuto(String imagen, String modelo, String anio, String precio) {
+  Widget bloqueAutos(String modelo, int color, String imagen) {
     return GestureDetector(
       onTap: () => {
-        Navigator.of(context).push(
-          CupertinoPageRoute(
+        Navigator.of(context).push(CupertinoPageRoute(
             builder: (context) => DetailPage(
-              image: "assets/$imagen.png",
-              nombre: modelo,
-              precio: precio,
-              modelo: "Modelo $anio",
-              marca: "Marca",
-              color: '',
-            ),
-          ),
-        )
+                color: color, image: "assets/$imagen.png", modelo: modelo)))
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: const Color.fromARGB(66, 56, 55, 55),
-        ),
+            borderRadius: BorderRadius.circular(15),
+            color: const Color.fromARGB(66, 56, 55, 55)),
         height: 65,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,65 +79,31 @@ class _listaAutosState extends State<listaAutos> {
             Row(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
                         blurRadius: 8,
-                        offset: Offset(0, 5),
+                        offset: const Offset(0, 5),
                         spreadRadius: 0.0,
                         blurStyle: BlurStyle.normal,
-                        color: Colors.blue,
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                        color: Color(color))
+                  ], borderRadius: BorderRadius.circular(20)),
                   padding: const EdgeInsets.all(8),
                   child: Hero(
-                    tag: Colors.blue,
-                    child: Image.asset("assets/$imagen.png"),
-                  ),
+                      tag: color, child: Image.asset("assets/$imagen.png")),
                 ),
                 const SizedBox(
                   width: 12,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      modelo,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      anio,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                ),
+                Text(
+                  modelo,
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                )
               ],
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  precio,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.more_vert_rounded),
-                  color: Colors.grey,
-                ),
-              ],
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.more_vert_rounded),
+              color: Colors.grey,
             ),
           ],
         ),
@@ -165,16 +124,9 @@ class _listaAutosState extends State<listaAutos> {
         ),
         RichText(
             text: TextSpan(
-                text: titulo,
-                style: const TextStyle(color: Colors.white70, fontSize: 14),
-                children: [
-              TextSpan(
-                  text: subTitulo,
-                  style: const TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 12))
-            ]))
+          text: titulo,
+          style: const TextStyle(color: Colors.white70, fontSize: 14),
+        ))
       ],
     );
   }
