@@ -2,43 +2,54 @@ import 'package:flutter/material.dart';
 import '../pages/detail_page.dart';
 import 'package:flutter/cupertino.dart';
 
-class listaAutos extends StatefulWidget {
-  const listaAutos({super.key});
-
+class ListaAutos extends StatefulWidget {
+  const ListaAutos({super.key});
   @override
-  State<listaAutos> createState() => _listaAutosState();
+  State<ListaAutos> createState() => _ListaAutosState();
 }
 
-class _listaAutosState extends State<listaAutos> {
+class _ListaAutosState extends State<ListaAutos> {
   double widthPantalla = 0;
-  final titleTextStyle = const TextStyle(
+  final tituloStyleText = const TextStyle(
       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white);
+
+  String seleccionarMarca = '';
 
   @override
   Widget build(BuildContext context) {
     widthPantalla = MediaQuery.of(context).size.width - 50;
+
+    // Filtra los autos según la marca seleccionada
+    List<Map<String, dynamic>> autosFiltrados = [];
+    if (seleccionarMarca.isNotEmpty) {
+      autosFiltrados =
+          autos.where((auto) => auto['marca'] == seleccionarMarca).toList();
+    } else {
+      autosFiltrados = List.from(autos);
+    }
+
     return Expanded(
       child: ListView(
         padding: const EdgeInsets.all(25),
         children: [
           Text(
-            "Autos Disponibles",
-            style: titleTextStyle,
+            "Vehículos Disponibles",
+            style: tituloStyleText,
           ),
           const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              bloquePortada("auto1.jpg", " Marca X", "2021"),
+              bloqueMarcas("chevy.jpg", "Chevrolet"),
               SizedBox(
                 width: widthPantalla * 0.03,
               ),
-              bloquePortada("auto2.jpg", " Marca Y", "2021"),
+              bloqueMarcas("kia.jpg", "Kia"),
               SizedBox(
                 width: widthPantalla * 0.03,
               ),
-              bloquePortada("auto3.jpg", " Marca Z", "2021")
+              bloqueMarcas("hyun.jpg", "Hyundai"),
             ],
           ),
           const Divider(
@@ -48,12 +59,9 @@ class _listaAutosState extends State<listaAutos> {
           const SizedBox(
             height: 20,
           ),
-          bloqueAutos("Modelo A", 0xff21E295, "auto4"),
-          bloqueAutos("Modelo B", 0xff21E295, "auto5"),
-          bloqueAutos("Modelo C", 0xff21E295, "auto6"),
-          bloqueAutos("Modelo D", 0xff21E295, "auto7"),
-          bloqueAutos("Modelo E", 0xff21E295, "auto8"),
-          bloqueAutos("Modelo F", 0xff21E295, "auto9"),
+          // Muestra solo los autos filtrados
+          for (var auto in autosFiltrados)
+            bloqueAutos(auto['modelo'], auto['color'], auto['imagen']),
         ],
       ),
     );
@@ -111,23 +119,44 @@ class _listaAutosState extends State<listaAutos> {
     );
   }
 
-  Widget bloquePortada(String image, String titulo, String subTitulo) {
-    return Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(18),
-          child: Image.asset("assets/$image",
-              width: widthPantalla * 0.31, height: 110, fit: BoxFit.cover),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        RichText(
-            text: TextSpan(
-          text: titulo,
-          style: const TextStyle(color: Colors.white70, fontSize: 14),
-        ))
-      ],
+  Widget bloqueMarcas(String image, String titulo) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          seleccionarMarca = titulo;
+        });
+      },
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Image.asset("assets/$image",
+                width: widthPantalla * 0.31, height: 110, fit: BoxFit.cover),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          RichText(
+              text: TextSpan(
+            text: titulo,
+            style: TextStyle(
+                color: seleccionarMarca == titulo ? Colors.blue : Colors.white70,
+                fontSize: 14),
+          ))
+        ],
+      ),
     );
   }
 }
+
+List<Map<String, dynamic>> autos = [
+  {'modelo':'Grove','color':0xff4913C4,'imagen':'chevy1','marca':'Chevrolet'},
+  {'modelo':'All New Montana RS','color':0xffF82A2D,'imagen':'chevy2','marca':'Chevrolet'},
+  {'modelo':'Onix Turbo Sedán','color':0xff21E295,'imagen':'chevy3','marca':'Chevrolet'},
+  {'modelo':'Seltos','color':0xffFFCB28, 'imagen':'kia1', 'marca':'Kia'},
+  {'modelo':'Rio S','color':0xffFE4649, 'imagen':'kia2', 'marca':'Kia'},
+  {'modelo':'Sorento','color':0xffF82A2D, 'imagen':'kia3', 'marca':'Kia'},
+  {'modelo':'All New Tucson','color':0xffDF1C6A,'imagen':'hyun1','marca':'Hyundai'},
+  {'modelo':'Creta','color':0xff21E295,'imagen':'hyun2','marca':'Hyundai'},
+  {'modelo':'Elantra','color':0xffFFCB28,'imagen':'hyun3','marca':'Hyundai'},
+];

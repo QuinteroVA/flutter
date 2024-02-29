@@ -19,7 +19,7 @@ class Headerwidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Mi Carrito Nuevo", style: tituloTextStyle),
+                Text("Mi Carro Nuevo", style: tituloTextStyle),
                 Text("Concesionaria", style: subTituloTextStyle)
               ]),
           Row(children: [
