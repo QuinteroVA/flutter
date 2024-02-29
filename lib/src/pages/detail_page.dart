@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:concesionario/src/animations/fade_animations.dart';
+import '../animations/fade_animations.dart';
 import '../widgets/blur_container.dart';
 import '../widgets/infotitle_widget.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({
-    super.key,
-    required this.color,
-    required this.image,
-    required this.modelo,
-  });
+  const DetailPage(
+      {super.key,
+      required this.color,
+      required this.image,
+      required this.modelo});
 
   final int color;
   final String image;
@@ -63,10 +62,9 @@ class _DetailPageState extends State<DetailPage> {
                             child: Text(
                               widget.modelo,
                               style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
                             ),
                           ),
                         )))
@@ -89,7 +87,7 @@ class _DetailPageState extends State<DetailPage> {
                 child: FadeAnimation(
                   intervalStart: 0.35,
                   child: Text(
-                    "Año",
+                    "Modelo",
                     style: TextStyle(color: Colors.white70),
                   ),
                 )),
@@ -101,8 +99,8 @@ class _DetailPageState extends State<DetailPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InfoTitle(title: "25.000", subTitle: "Precio"),
-                    InfoTitle(title: "Blanco", subTitle: "Color"),
+                    InfoTitle(title: "Modelo", subTitle: "Modelo"),
+                    InfoTitle(title: "2023", subTitle: "Año")
                   ],
                 ),
               ),
@@ -120,9 +118,8 @@ class _DetailPageState extends State<DetailPage> {
                   alignment: Alignment.center,
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(widget.color),
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(widget.color)),
                   child: const Text("Volver",
                       style: TextStyle(
                           color: Colors.white60,

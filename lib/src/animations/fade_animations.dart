@@ -8,7 +8,7 @@ class FadeAnimation extends StatelessWidget {
       this.end = 1,
       this.intervalStart = 0,
       this.intervalEnd = 1,
-      this.duration = const Duration(milliseconds: 3000),
+      this.duration = const Duration(milliseconds: 1500),
       this.curve = Curves.fastOutSlowIn});
   final double begin, end, intervalStart, intervalEnd;
   final Duration duration;
