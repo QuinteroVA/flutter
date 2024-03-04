@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../pages/detail_page.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/cupertino.dart';
+import '../pages/detail_page.dart';
 
 class ListaAutos extends StatefulWidget {
-  const ListaAutos({super.key});
+  const ListaAutos({Key? key}) : super(key: key);
+
   @override
   State<ListaAutos> createState() => _ListaAutosState();
 }
@@ -11,15 +14,33 @@ class ListaAutos extends StatefulWidget {
 class _ListaAutosState extends State<ListaAutos> {
   double widthPantalla = 0;
   final tituloStyleText = const TextStyle(
-      fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white);
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
 
   String seleccionarMarca = '';
+  List<Map<String, dynamic>> autos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarAutos();
+  }
+
+  Future<void> _cargarAutos() async {
+    final String data = await rootBundle.loadString('assets/autos.json');
+    final List<dynamic> jsonData = json.decode(data);
+
+    setState(() {
+      autos = jsonData.cast<Map<String, dynamic>>();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     widthPantalla = MediaQuery.of(context).size.width - 50;
 
-    // Filtra los autos según la marca seleccionada
     List<Map<String, dynamic>> autosFiltrados = [];
     if (seleccionarMarca.isNotEmpty) {
       autosFiltrados =
@@ -54,12 +75,11 @@ class _ListaAutosState extends State<ListaAutos> {
           ),
           const Divider(
             thickness: 1,
-            color: Color.fromARGB(255, 62, 62, 62),
+            color: Color.fromARGB(255, 255, 255, 255),
           ),
           const SizedBox(
             height: 20,
           ),
-          // Muestra solo los autos filtrados
           for (var auto in autosFiltrados)
             bloqueAutos(auto['modelo'], auto['color'], auto['imagen']),
         ],
@@ -67,7 +87,7 @@ class _ListaAutosState extends State<ListaAutos> {
     );
   }
 
-  Widget bloqueAutos(String modelo, int color, String imagen) {
+  Widget bloqueAutos(String modelo, String color, String imagen) {
     return GestureDetector(
       onTap: () => {
         Navigator.of(context).push(CupertinoPageRoute(
@@ -79,7 +99,7 @@ class _ListaAutosState extends State<ListaAutos> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: const Color.fromARGB(66, 56, 55, 55)),
+            color: Colors.grey.withOpacity(0.1)),
         height: 65,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,13 +107,14 @@ class _ListaAutosState extends State<ListaAutos> {
             Row(
               children: [
                 Container(
-                  decoration: BoxDecoration(boxShadow: [
+                  decoration: BoxDecoration(boxShadow: const [
                     BoxShadow(
                         blurRadius: 8,
-                        offset: const Offset(0, 5),
+                        offset: Offset(0, 5),
                         spreadRadius: 0.0,
                         blurStyle: BlurStyle.normal,
-                        color: Color(color))
+                        //color: Color(color)
+                        ),
                   ], borderRadius: BorderRadius.circular(20)),
                   padding: const EdgeInsets.all(8),
                   child: Hero(
@@ -108,10 +129,11 @@ class _ListaAutosState extends State<ListaAutos> {
                 )
               ],
             ),
+            //submenu
             IconButton(
               onPressed: () {},
               icon: const Icon(Icons.more_vert_rounded),
-              color: Colors.grey,
+              color: Colors.white,
             ),
           ],
         ),
@@ -129,7 +151,7 @@ class _ListaAutosState extends State<ListaAutos> {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(10),
             child: Image.asset("assets/$image",
                 width: widthPantalla * 0.31, height: 110, fit: BoxFit.cover),
           ),
@@ -140,7 +162,9 @@ class _ListaAutosState extends State<ListaAutos> {
               text: TextSpan(
             text: titulo,
             style: TextStyle(
-                color: seleccionarMarca == titulo ? Colors.blue : Colors.white70,
+                color: seleccionarMarca == titulo
+                    ? Colors.lightBlue
+                    : Colors.white,
                 fontSize: 14),
           ))
         ],
@@ -148,15 +172,3 @@ class _ListaAutosState extends State<ListaAutos> {
     );
   }
 }
-
-List<Map<String, dynamic>> autos = [
-  {'modelo':'Grove','color':0xff4913C4,'imagen':'chevy1','marca':'Chevrolet'},
-  {'modelo':'All New Montana RS','color':0xffF82A2D,'imagen':'chevy2','marca':'Chevrolet'},
-  {'modelo':'Onix Turbo Sedán','color':0xff21E295,'imagen':'chevy3','marca':'Chevrolet'},
-  {'modelo':'Seltos','color':0xffFFCB28, 'imagen':'kia1', 'marca':'Kia'},
-  {'modelo':'Rio S','color':0xffFE4649, 'imagen':'kia2', 'marca':'Kia'},
-  {'modelo':'Sorento','color':0xffF82A2D, 'imagen':'kia3', 'marca':'Kia'},
-  {'modelo':'All New Tucson','color':0xffDF1C6A,'imagen':'hyun1','marca':'Hyundai'},
-  {'modelo':'Creta','color':0xff21E295,'imagen':'hyun2','marca':'Hyundai'},
-  {'modelo':'Elantra','color':0xffFFCB28,'imagen':'hyun3','marca':'Hyundai'},
-];

@@ -20,4 +20,5 @@ flutter:
 
   assets:
     - assets/
+    - assets/autos.json
 

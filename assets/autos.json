@@ -1,0 +1,11 @@
+[
+  {"modelo": "Grove", "color": "0xff4913C4", "imagen": "chevy1", "marca": "Chevrolet","anio":"2024"},
+  {"modelo": "All New Montana RS", "color": "0xffF82A2D", "imagen": "chevy2", "marca": "Chevrolet","anio":"2024"},
+  {"modelo": "Onix Turbo Sedán", "color": "0xff21E295", "imagen": "chevy3", "marca": "Chevrolet","anio":"2024"},
+  {"modelo": "Seltos", "color": "0xffFFCB28", "imagen": "kia1", "marca": "Kia","anio":"2024"},
+  {"modelo": "Rio S", "color": "0xffFE4649", "imagen": "kia2", "marca": "Kia","anio":"2024"},
+  {"modelo": "Sorento", "color": "0xffF82A2D", "imagen": "kia3", "marca": "Kia","anio":"2024"},
+  {"modelo": "All New Tucson", "color": "0xffDF1C6A", "imagen": "hyun1", "marca": "Hyundai","anio":"2024"},
+  {"modelo": "Creta", "color": "0xff21E295", "imagen": "hyun2", "marca": "Hyundai","anio":"2024"},
+  {"modelo": "Elantra", "color": "0xffFFCB28", "imagen": "hyun3", "marca": "Hyundai","anio":"2024"}
+]
