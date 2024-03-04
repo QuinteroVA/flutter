@@ -63,13 +63,9 @@ class _ListaAutosState extends State<ListaAutos> {
           Row(
             children: [
               bloqueMarcas("chevy.jpg", "Chevrolet"),
-              SizedBox(
-                width: widthPantalla * 0.03,
-              ),
+              SizedBox(width: widthPantalla * 0.03),
               bloqueMarcas("kia.jpg", "Kia"),
-              SizedBox(
-                width: widthPantalla * 0.03,
-              ),
+              SizedBox(width: widthPantalla * 0.03),
               bloqueMarcas("hyun.jpg", "Hyundai"),
             ],
           ),
