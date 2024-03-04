@@ -1,3 +1,4 @@
+import 'package:concesionario/src/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:concesionario/src/widgets/header_widget.dart';
 import 'package:concesionario/src/widgets/lista_widget.dart';
@@ -12,13 +13,23 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 16, 16, 16),
+      backgroundColor: Colors.grey[900],
       body: const Column(
         children: <Widget>[Headerwidget(), ListaAutos()],
       ),
+      //botón flotante
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color.fromARGB(255, 95, 25, 208),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const WelcomePage()),
+          );
+        },
+        backgroundColor: Colors.blue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+              30.0),
+        ),
         child: const Icon(Icons.add),
       ),
     );

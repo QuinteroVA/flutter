@@ -4,13 +4,14 @@ import '../widgets/blur_container.dart';
 import '../widgets/infotitle_widget.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage(
-      {super.key,
-      required this.color,
-      required this.image,
-      required this.modelo});
+  const DetailPage({
+    super.key,
+    required this.color,
+    required this.image,
+    required this.modelo,
+  });
 
-  final int color;
+  final String color;
   final String image;
   final String modelo;
 
@@ -25,12 +26,12 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     alturadepantalla = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
-                colors: [Color(widget.color), Colors.black],
+                colors: [Colors.lightBlue, Colors.white],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
         child: Column(
@@ -42,8 +43,7 @@ class _DetailPageState extends State<DetailPage> {
                   padding: const EdgeInsets.only(left: 12.0),
                   child: SizedBox(
                     height: alturadepantalla * 0.6,
-                    child: Hero(
-                        tag: widget.color, child: Image.asset(widget.image)),
+                    child: Hero(tag: widget.color, child: Image.asset(widget.image)),
                   ),
                 ),
                 Positioned(
@@ -58,13 +58,13 @@ class _DetailPageState extends State<DetailPage> {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white.withOpacity(0.1)),
+                                color: Colors.black.withOpacity(0.2)), 
                             child: Text(
                               widget.modelo,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  color: Colors.white),
+                                  color: Colors.black), 
                             ),
                           ),
                         )))
@@ -77,7 +77,7 @@ class _DetailPageState extends State<DetailPage> {
                   intervalStart: 0.3,
                   child: Text(widget.modelo,
                       style: const TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold)),
                 )),
@@ -88,7 +88,7 @@ class _DetailPageState extends State<DetailPage> {
                   intervalStart: 0.35,
                   child: Text(
                     "Modelo",
-                    style: TextStyle(color: Colors.white70),
+                    style: TextStyle(color: Colors.black), 
                   ),
                 )),
             const SizedBox(height: 50),
@@ -100,7 +100,7 @@ class _DetailPageState extends State<DetailPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InfoTitle(title: "Modelo", subTitle: "Modelo"),
-                    InfoTitle(title: "2023", subTitle: "Año")
+                    InfoTitle(title: "2024", subTitle: "Año")
                   ],
                 ),
               ),
@@ -109,9 +109,7 @@ class _DetailPageState extends State<DetailPage> {
             FadeAnimation(
               intervalStart: 0.5,
               child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
+                onTap: () => Navigator.pop(context),
                 child: Container(
                   width: double.infinity,
                   height: 50,
@@ -119,10 +117,10 @@ class _DetailPageState extends State<DetailPage> {
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(widget.color)),
+                      color: Colors.blue.withOpacity(0.3)),
                   child: const Text("Volver",
                       style: TextStyle(
-                          color: Colors.white60,
+                          color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.bold)),
                 ),
