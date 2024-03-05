@@ -11,40 +11,27 @@ class WelcomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Concesionaria',
-              style: TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 34,
-                fontWeight: FontWeight.bold,
+            const Text('Concesionaria',
+              style: TextStyle(color: Colors.blueGrey,fontSize: 34,fontWeight: FontWeight.bold
               ),
             ),
-            Image.asset(
-              'assets/logo.png',
-              width: 370,
-              height: 370,
+            Image.asset('assets/logo.png',width: 370,height: 370
             ),
-            const Text(
-              'Mi Carro Nuevo',
-              style: TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 44,
-                fontWeight: FontWeight.bold,
+            const Text('Mi Carro Nuevo',
+              style: TextStyle(color: Colors.blueGrey,fontSize: 44,fontWeight: FontWeight.bold
               ),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
+                Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Home()),
                 );
               },
               style: ElevatedButton.styleFrom(
-                fixedSize: const Size(200, 60), // Ajusta el tamaño del botón
+                fixedSize: const Size(200, 60),
               ),
-              child: const Text(
-                'Entrar',
-                style: TextStyle(fontSize: 20), // Ajusta el tamaño del texto
+              child: const Text('Entrar',
+                style: TextStyle(fontSize: 20),
               ),
             ),
           ],

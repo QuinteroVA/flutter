@@ -47,7 +47,9 @@ class Headerwidget extends StatelessWidget {
                     size: 28,
                     color: Colors.green,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                 ),
               ),
               const SizedBox(width: 10),
@@ -63,7 +65,7 @@ class Headerwidget extends StatelessWidget {
                     size: 28,
                     color: Colors.red,
                   ),
-                  onPressed: () {},
+                  onPressed: () { },
                 ),
               ),
             ],
