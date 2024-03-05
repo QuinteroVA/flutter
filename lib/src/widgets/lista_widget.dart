@@ -44,7 +44,7 @@ class _ListaAutosState extends State<ListaAutos> {
     List<Map<String, dynamic>> autosFiltrados = [];
     if (seleccionarMarca.isNotEmpty) {
       autosFiltrados =
-          autos.where((auto) => auto['marca'] == seleccionarMarca).toList();
+        autos.where((auto) => auto['marca'] == seleccionarMarca).toList();
     } else {
       autosFiltrados = List.from(autos);
     }
@@ -63,9 +63,13 @@ class _ListaAutosState extends State<ListaAutos> {
           Row(
             children: [
               bloqueMarcas("chevy.jpg", "Chevrolet"),
-              SizedBox(width: widthPantalla * 0.03),
+              SizedBox(
+                width: widthPantalla * 0.03,
+              ),
               bloqueMarcas("kia.jpg", "Kia"),
-              SizedBox(width: widthPantalla * 0.03),
+              SizedBox(
+                width: widthPantalla * 0.03,
+              ),
               bloqueMarcas("hyun.jpg", "Hyundai"),
             ],
           ),
@@ -88,7 +92,14 @@ class _ListaAutosState extends State<ListaAutos> {
       onTap: () => {
         Navigator.of(context).push(CupertinoPageRoute(
             builder: (context) => DetailPage(
-                color: color, image: "assets/$imagen.png", modelo: modelo)))
+                color: color,
+                imagen: "assets/$imagen.png",
+                modelo: modelo,
+                marca: '',
+                transmision: '',
+                traccion: '',
+                anio: '',
+                )))
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
@@ -137,7 +148,7 @@ class _ListaAutosState extends State<ListaAutos> {
     );
   }
 
-  Widget bloqueMarcas(String image, String titulo) {
+  Widget bloqueMarcas(String imagen, String titulo) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -148,7 +159,7 @@ class _ListaAutosState extends State<ListaAutos> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.asset("assets/$image",
+            child: Image.asset("assets/$imagen",
                 width: widthPantalla * 0.31, height: 110, fit: BoxFit.cover),
           ),
           const SizedBox(
